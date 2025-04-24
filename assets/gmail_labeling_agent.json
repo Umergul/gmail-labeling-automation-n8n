@@ -1,0 +1,269 @@
+{
+  "name": "gmail_labeling_agent",
+  "nodes": [
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "simple": false,
+        "filters": {},
+        "options": {}
+      },
+      "id": "a0a8d879-d78d-4002-b9a8-2807e2207453",
+      "name": "Gmail Trigger",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -680,
+        300
+      ],
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "uSXeucn8nyJQIZ3B",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_3846930852317465261"
+        ]
+      },
+      "id": "de27bf4f-31b6-4bcc-9541-a8beb99cbd7f",
+      "name": "Sponsorship",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        340,
+        40
+      ],
+      "webhookId": "092b85f6-a304-489c-a76f-d398087d2f8a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "uSXeucn8nyJQIZ3B",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_5481030258361446514"
+        ]
+      },
+      "id": "76600f9a-9ca1-4a1b-a40d-97834be53141",
+      "name": "Collaboration",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        340,
+        220
+      ],
+      "webhookId": "ba7c178a-1cf6-4cb7-9ecf-9beefb2d414e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "uSXeucn8nyJQIZ3B",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_3972075926990954272"
+        ]
+      },
+      "id": "a21a8edd-ed35-466a-b859-115875d98b02",
+      "name": "Business Inquiries",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        340,
+        380
+      ],
+      "webhookId": "dae6c168-2839-4642-9a8b-7d2ab3c99121",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "uSXeucn8nyJQIZ3B",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "addLabels",
+        "messageId": "={{ $json.id }}",
+        "labelIds": [
+          "Label_667313740287819310"
+        ]
+      },
+      "id": "1012ba1d-4ab1-4aac-86f4-0d8a11d9cb48",
+      "name": "Others",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.1,
+      "position": [
+        340,
+        540
+      ],
+      "webhookId": "38c9c75d-a832-4922-a32c-c460fb3d47fc",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "uSXeucn8nyJQIZ3B",
+          "name": "Gmail account 2"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "content": "## I'm your personal email AI Labeling Agent :)\n\n### I will organize your inbox by labeling all incoming emails into predefined labels to save you time. ",
+        "height": 224,
+        "width": 687,
+        "color": 5
+      },
+      "id": "0fca1d85-dd84-4b6b-a44c-d20dba8ad83f",
+      "name": "Sticky Note",
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -540,
+        40
+      ]
+    },
+    {
+      "parameters": {
+        "inputText": "={{ $json.text }}",
+        "categories": {
+          "categories": [
+            {
+              "category": "Sponsorship",
+              "description": "Emails that offer or inquire about sponsorship deals for the YouTube channel, including potential sponsors wanting to advertise or collaborate on content."
+            },
+            {
+              "category": "Collaboration",
+              "description": "Emails from AI companies or related businesses that are interested in collaborating on projects, tutorials, or content creation for the channel."
+            },
+            {
+              "category": "Business Inquiries",
+              "description": "Emails that pertain to general business-related topics not specifically related to sponsorship or collaboration, such as inquiries about the channel, requests for information, or other miscellaneous business communications."
+            },
+            {
+              "category": "Others",
+              "description": "All others emails that do not match the description of previous labels. "
+            }
+          ]
+        },
+        "options": {
+          "systemPromptTemplate": "Please classify the text provided by the user into one of the following categories: {categories}, and use the provided formatting instructions below. Don't explain, and only output the json."
+        }
+      },
+      "id": "04fb2a2b-53ad-4107-90c8-e75992e55344",
+      "name": "Labeling AI Agent",
+      "type": "@n8n/n8n-nodes-langchain.textClassifier",
+      "typeVersion": 1,
+      "position": [
+        -340,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "model": "llama3-70b-8192",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -340,
+        520
+      ],
+      "id": "9d4ef0bb-7b83-452b-b8a2-546c229f9ad8",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "T6ArAflEjPtiHn5t",
+          "name": "Groq account 2"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Gmail Trigger": {
+      "main": [
+        [
+          {
+            "node": "Labeling AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Labeling AI Agent": {
+      "main": [
+        [
+          {
+            "node": "Sponsorship",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Collaboration",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Business Inquiries",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Others",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Labeling AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "ab06bbab-581a-40a8-a323-b0b390096b7f",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1393efedf24accf4651cd25aa8e349304ec660d1b6d4e57b11799cd87d821644"
+  },
+  "id": "CFa0o4EV0k2TJNFa",
+  "tags": []
+}
