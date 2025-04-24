@@ -70,11 +70,9 @@ graph TD
 
 ## 📷 Screenshots
 
-> Add screenshots of your n8n workflow and labeled Gmail inbox in the `/assets` folder  
-> Then embed them here like this:
-
+![Workflow Screenshot](https://github.com/Umergul/gmail-labeling-automation-n8n/blob/4a71010734875c3a4cd13cdc50efffd8454f43bd/assets/Gmail%20labeling%20Agent.JPG)
+![Inbox Labels Preview](https://github.com/Umergul/gmail-labeling-automation-n8n/blob/4a71010734875c3a4cd13cdc50efffd8454f43bd/assets/Gmail%20labeling%20Agent.JPG)
 ```markdown
-![Workflow Screenshot](./assets/gmail-labeling-workflow.png)
-![Inbox Labels Preview](./assets/gmail-labels.png)
+
 
 
